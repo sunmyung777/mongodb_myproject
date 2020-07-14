@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <%- include("../header"); %>
+  <div class="purple-gradient quiz_cover_div">
+    <a class="ranktohome" href="/"><i class="fas fa-long-arrow-alt-left ranktohome_icon"></i>Home</a>
+    <div id="myProgress"><div id="myBar"></div></div>
+    <div class="quiz_munje"></div>
+    <div class="first_line">
+      <button type="button" class="btn quiz_button" id="btn0" style="background-color:#ff4444;"></button>
+      <button type="button" class="btn quiz_button" id="btn1"style="background-color:#ffbb33;"></button>
+    </div>
+
+    <div class="second_line">
+      <button type="button" class="btn quiz_button" id="btn2"style="background-color:#00C851;"></button>
+      <button type="button" class="btn quiz_button" id="btn3"style="background-color:#33b5e5;"></button>
+    </div>
+    <div id="quiztype" style="display: none;"></div>
+  </div>
+  <%- include("../footer"); %>
+</body>
+<script>
+  var nStart = new Date().getTime();
+  var count=0;
+  var score=0;
+  var quiz_result={};
+  var quizlist=[];
+  let next=function(){
+      $.ajax({
+        url:"/api/quiz/data",
+        type:"get"
+      }).done((json)=>{
+        if(count<=9){
+          if(count<=9) $('#myBar').css("background-color",'red');
+          if(count<=6) $('#myBar').css("background-color",'green');
+          if(count<=3) $('#myBar').css("background-color",'blue');
+          
+          quizlist=json.quizlist;
+          quiz_result=json.quiz_result;
+          count++;
+          $('#myBar').width((count-1)*10+'%');
+          $('.quiz_munje').html(quiz_result[0].job);
+          $('#quiztype').text(json.quiztype);
+          $('#btn0').html(quizlist[0][1]);
+          $('#btn1').html(quizlist[1][1]);
+          $('#btn2').html(quizlist[2][1]);
+          $('#btn3').html(quizlist[3][1]);
+        }
+        else {
+          var nEnd = new Date().getTime();
+          score=Math.floor(score*(100-(nEnd-nStart)/5000)/50);
+          location.href='user/end/'+score;
+        }
+      }).fail((request,status,error)=>{
+        alert(request.responseText);
+      });
+    };
+    
+
+  $(function(){
+    next();
+    $("#btn0").click(function(){
+        var quiztype=$('#quiztype').text();
+        var q=quizlist[0][0];
+        var a=quiz_result[0].bigclass;
+        var b=quiz_result[0].middleclass;
+      if(quiztype==1){
+         if(  q == a ) score+=100;
+      }
+      else if(quiztype==2){
+        if((q == b)) score+=100;
+      }
+      next();
+    });
+    $("#btn1").click(function(){
+        var quiztype=$('#quiztype').text();
+        var q=quizlist[1][0];
+        var a=quiz_result[0].bigclass;
+        var b=quiz_result[0].middleclass;
+      if(quiztype==1){
+         if(  q == a ) score+=100;
+      }
+      else if(quiztype==2){
+        if((q == b)) score+=100;
+      }
+      next();
+    });
+    $("#btn2").click(function(){
+        var quiztype=$('#quiztype').text();
+        var q=quizlist[2][0];
+        var a=quiz_result[0].bigclass;
+        var b=quiz_result[0].middleclass;
+      if(quiztype==1){
+         if(  q == a ) score+=100;
+      }
+      else if(quiztype==2){
+        if((q == b)) score+=100;
+      }
+      next();
+    });
+    $("#btn3").click(function(){
+        var quiztype=$('#quiztype').text();
+        var q=quizlist[3][0];
+        var a=quiz_result[0].bigclass;
+        var b=quiz_result[0].middleclass;
+      if(quiztype==1){
+         if(  q == a ) score+=100;
+      }
+      else if(quiztype==2){
+        if((q == b)) score+=100;
+      }
+      next();
+    });
+  });
+  </script>
+</html>

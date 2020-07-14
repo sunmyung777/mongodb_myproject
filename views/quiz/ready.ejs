@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <%- include("../header"); %>
+<body>
+    <div class="purple-gradient main_cover_div">
+        <div class="ready_info">Ready?</div>
+        <div class="quizTimer"></div>
+    </div>
+<%- include("../footer"); %>
+</body>
+<script>
+    $(function(){
+        var sec=5;
+        $('.quizTimer').text(sec+"s");
+        let second=setInterval(function(){
+            sec--;
+            $('.quizTimer').text(sec+"s");
+        },1000);
+        let timer=setTimeout(function(){
+            location.href='/api/quiz';
+        },5000);
+    })
+</script>
+</html>

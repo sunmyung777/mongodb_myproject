@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <%- include("../header"); %>
+<body>
+    <div class="purple-gradient main_cover_div">
+        <a class="ranktohome" href="/"><i class="fas fa-long-arrow-alt-left ranktohome_icon"></i>Home</a>
+        <div class="signin">
+            <!-- Material form login -->
+    <div class="card">
+    
+        <h5 class="card-header info-color purple-gradient text-center py-4">
+          <strong class="signin_main_text">Connect</strong>
+        </h5>
+      
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0">
+      
+          <!-- Form -->
+          <form id="signinForm" class="text-center" style="color: #757575;">
+            <div class="md-form">
+                <input type="text" id="name" class="form-control" required>
+                <label for="name">Name</label>
+              </div>
+
+            <!-- Email -->
+            <div class="md-form">
+              <input type="text" id="email" class="form-control" required>
+              <label for="email">ID</label>
+            </div>
+       
+      
+            <!-- Sign in button -->
+            <button class="btn purple-gradient btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Connect</button>
+      
+            <!-- Register -->
+            <p>Not a member?
+              <a href="/api/user/signup">Register</a>
+            </p>
+          </form>
+          <!-- Form -->
+      
+        </div>
+      
+      </div>
+      <!-- Material form login -->
+        </div>
+    </div>
+<%- include("../footer"); %>
+</body>
+<script>
+    $(function (){
+      $("#signinForm").submit((event)=>{
+        event.preventDefault();
+        const name=$("#name").val();
+        const email=$("#email").val();
+
+        $.ajax({
+          url: "/api/user/signin",
+          type:"post",
+          data:{name,email},
+        }).done(()=>{
+          location.href="/";
+        }).fail((request,status,error)=>{
+          alert(request.responseText);
+        });
+      });
+    });
+</script>
+</html>

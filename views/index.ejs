@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <%- include("header"); %>
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <a class="navbar-brand" href="/" style="font-family: 'Black Han Sans', sans-serif;font-size: 30px;"><strong>ㅅㅅㄱㄹ</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/api/rank">ranking</a>
+        </li>
+      </ul>
+      <% if (user === null) { %>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/api/user/signin">Sign in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/api/user/signup">Sign up</a>
+          </li>
+        </ul>
+      <% } else { %>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link"><%= user.name %></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/api/user/signout">Sign out</a>
+          </li>
+        </ul>
+      <% } %>
+    </div>
+  </nav>
+
+<div class="purple-gradient main_cover_div">
+  <div class="card-title h2 my-4 py-2 main_title_text ahover">Sangseo!</div>
+      <a class="btn main_title_btn" href="/api/quiz/ready"><i class="fas fa-fire-alt"></i> 시작하기</a>
+</div>
+<%- include("footer"); %>
+</body>
+</html>

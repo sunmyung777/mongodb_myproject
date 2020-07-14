@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <%- include("../header"); %>
+<body>
+    <% for(var i = 0 ; i < 50; i ++ ){ %> 
+        <div class="snow"></div>
+     <% } %>
+    <div class="purple-gradient main_cover_div">
+        <div class="snowflakes" aria-hidden="true">
+            <% for(var i=0; i < 10; i++) { %>
+            <div class="snowflake">❅</div>
+            <div class="snowflake">❆</div>
+            <% } %>
+          </div>
+        <img src="/images/mountain.png" class="endImg">
+        <div class="scoreboard">
+            <div class="score_text">Your Score!</div>
+            <div class="your_score"><%= id %></div>
+            <div class="endSelect">
+                <a href="/api/quiz/ready" class="Doagain">
+                    <i class="fas fa-arrow-left"></i><div>Do it again?</div>
+                </a>
+                <a href="/" class="home_go">
+                    <i class="fas fa-home"></i><div>Home</div>
+                </a>
+            </div>
+        </div>
+    </div>
+<%- include("../footer"); %>
+</body>
+</html>

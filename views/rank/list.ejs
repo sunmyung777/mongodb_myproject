@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <%- include("../header"); %>
+
+  <div class="purple-gradient rank_cover_div">
+    <a class="ranktohome" href="/"><i class="fas fa-long-arrow-alt-left ranktohome_icon"></i>Home</a>
+    <div class="card-title h2 my-4 py-2 main_title_text">Ranking!</div>
+    <div class="ranking_box">
+        <div class="ranking_rank rank_text rank_info">등수</div>
+        <div class="ranking_name rank_text rank_info">이름</div>
+        <div class="ranking_point rank_text rank_info">점수</div>
+    </div>
+    <div class="ranking_box">
+        <div class="ranking_rank rank_text rank_my">나</div>
+        <div class="ranking_name rank_text rank_my"><%= user.name %></div>
+        <div class="ranking_point rank_text rank_my"><%= user.maxscore %></div>
+    </div>
+    <% var count=1 %>
+    <% result.forEach(rank =>{ %>
+        <div class="ranking_box">
+            <div class="ranking_rank rank_text"><%= count %></div>
+            <div class="ranking_name rank_text"><%= rank.name %></div>
+            <div class="ranking_point rank_text"><%= rank.maxscore %></div>
+        </div>
+        <% count++ %>
+    <% }); %> 
+    <div style="margin-bottom: 100px;"></div>
+  </div>
+  <!-- <% result.forEach(rank =>{ %>
+    <div><%= rank.name %></div>
+  <% }); %> -->
+
+
+  <%- include("../footer"); %>
+</body>
+</html>
